@@ -79,6 +79,7 @@ if any(nonzeros(image_data.ZData))
     obj.data{surfaceIndex}.contours.x.size = xsize;
     obj.data{surfaceIndex}.contours.x.show = true;
     obj.data{surfaceIndex}.contours.x.color = 'black';
+    obj.data{surfaceIndex}.contours.x.alpha = 0.5;
     % y-direction
     ymin = min(y(:));
     ymax = max(y(:));
@@ -88,7 +89,26 @@ if any(nonzeros(image_data.ZData))
     obj.data{surfaceIndex}.contours.y.size = ysize;
     obj.data{surfaceIndex}.contours.y.show = true;
     obj.data{surfaceIndex}.contours.y.color = 'black';
-    
+    obj.data{surfaceIndex}.contours.y.alpha = 0.5;
+%     xmin = 1;
+%     xmax = 1;
+%     xsize = min((xmax - xmin) / (size(x, 2)-1),1); 
+%     obj.data{surfaceIndex}.contours.x.start = xmin;
+%     obj.data{surfaceIndex}.contours.x.end = xmax;
+%     obj.data{surfaceIndex}.contours.x.size = xsize;
+%     obj.data{surfaceIndex}.contours.x.show = true;
+%     obj.data{surfaceIndex}.contours.x.color = 'black';
+%     obj.data{surfaceIndex}.contours.x.alpha = 0.5;
+%     % y-direction
+%     ymin = 1;
+%     ymax = 1;
+%     ysize = min((ymax - ymin) / (size(y, 1)-1),1);
+%     obj.data{surfaceIndex}.contours.y.start = ymin;
+%     obj.data{surfaceIndex}.contours.y.end = ymax;
+%     obj.data{surfaceIndex}.contours.y.size = ysize;
+%     obj.data{surfaceIndex}.contours.y.show = true;
+%     obj.data{surfaceIndex}.contours.y.color = 'black';
+%     obj.data{surfaceIndex}.contours.y.alpha = 0.5;
     
 else
     
@@ -106,10 +126,11 @@ end
 
 %-image colorscale-%
 
-cmap = figure_data.Colormap;
-len = length(cmap)-1;
+cmap = figure_data.Colormap(surfaceIndex);
+len = min(length(cmap)-1,1);
 
-for c = 1: length(cmap)
+% for c = 1: length(cmap)
+for c = surfaceIndex
     col = 255 * cmap(c, :);
     obj.data{surfaceIndex}.colorscale{c} = { (c-1)/len , ['rgb(' num2str(col(1)) ',' num2str(col(2)) ',' num2str(col(3)) ')'  ]  };
 end
