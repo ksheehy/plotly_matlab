@@ -5,7 +5,7 @@ function showLegend = getShowLegend(plotData)
 
 	    switch legInfo.IconDisplayStyle
 	        case 'on'
-	            showLegend = true;
+	            showLegend = false;
 	        case 'off'
 	            showLegend = false;
 	    end
